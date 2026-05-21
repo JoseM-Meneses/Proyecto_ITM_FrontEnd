@@ -1,0 +1,6 @@
+server:
+  port: 8090
+
+api:
+  tenis:
+    base-url: http://localhost:8010/proyecto
