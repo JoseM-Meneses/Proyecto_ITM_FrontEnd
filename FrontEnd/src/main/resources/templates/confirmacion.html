@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Confirmación</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -13,33 +14,37 @@
 <div class="bg-white rounded-2xl shadow-2xl p-10 w-full max-w-2xl">
 
     <h1 class="text-4xl font-bold text-green-600 mb-8">
-        ¡Tenis Registrado!
+        Tenis Registrado!
     </h1>
 
     <div th:object="${tenisRegistrado}" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!---Object: conecta el formulario con tenisRegistrado del View para que este trabaje en el (gets)--->
 
         <div class="border rounded-xl p-4">
             <p class="text-gray-500">
                 Marca
             </p>
+
             <p class="text-xl font-semibold"
                th:text="*{marca}">
-            </p>
+            </p> <!--Text: Reemplaza el valor vacio por el valor de marca obtenida (getMarca)--->
         </div>
 
         <div class="border rounded-xl p-4">
             <p class="text-gray-500">
                 Modelo
             </p>
+
             <p class="text-xl font-semibold"
                th:text="*{modelo}">
-            </p>
+            </p> <!---getModelo-->
         </div>
 
         <div class="border rounded-xl p-4">
             <p class="text-gray-500">
                 Precio
             </p>
+
             <p class="text-xl font-semibold"
                th:text="*{precio}">
             </p>
@@ -49,6 +54,7 @@
             <p class="text-gray-500">
                 Stock
             </p>
+
             <p class="text-xl font-semibold"
                th:text="*{stock}">
             </p>
@@ -61,10 +67,9 @@
            class="bg-blue-600 hover:bg-blue-700
                   text-white px-6 py-3 rounded-xl">
             Volver al Inventario
-        </a>
+        </a> <!--Link para devolverse a la URL principal (/tenis)--->
     </div>
 
 </div>
-
 </body>
 </html>

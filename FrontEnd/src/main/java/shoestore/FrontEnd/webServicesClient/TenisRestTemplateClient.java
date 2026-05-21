@@ -13,15 +13,18 @@ import java.util.List;
 public class TenisRestTemplateClient {
 
     @Autowired
-    private RestTemplate restTemplate;
+    private RestTemplate restTemplate; //Permite hacer peticiones HTTP (getForObject, post, put, delete)
 
+    //Definicion de URL como base
     @Value("${api.tenis.base-url:http://localhost:8010}")
     private String base;
 
+    //Obtiene los tenis desde la API
     public List<TenisDto> obtenerTenis() {
-        String url = base + "/api/tenis/inventario";
+        String url = base + "/api/tenis/inventario"; //Construye la url completa
+        //Hace el get a la API con getForObject y el Rest convierte el JSON a un arreglo
         TenisDto[] response = restTemplate.getForObject(url, TenisDto[].class);
-        return Arrays.asList(response);
+        return Arrays.asList(response); //Devuelve los tenis como lista (List<TenisDto>)
     }
 
     public String agregarTenis(String marca, String modelo, double precio, int stock) {
@@ -29,9 +32,11 @@ public class TenisRestTemplateClient {
                 + "?marca=" + marca
                 + "&modelo=" + modelo
                 + "&precio=" + precio
-                + "&stock=" + stock;
+                + "&stock=" + stock; //Url completa con los parametros dados
 
-        return restTemplate.postForObject(url, null, String.class);
+        //Convierte la repuesta de la API al hacer el POST en un String
+        return restTemplate.postForObject(url, null, String.class); //Devuelve un mensaje
+        //Url -> A donde / null -> boddy / String -> a que debe convertirse
     }
 
     public void actualizarTenis(int id, double precio, int stock) {
@@ -40,16 +45,19 @@ public class TenisRestTemplateClient {
                 + "&precio=" + precio
                 + "&stock=" + stock;
 
-        restTemplate.put(url, null);
+        //Hace la peticion PUT a la API
+        restTemplate.put(url, null); //Actualiza los tenis - No devuelve nada
     }
 
     public void eliminarTenis(int id) {
         String url = base + "/api/tenis/eliminar?idTenis=" + id;
+        //Hace la peticion DELETE a la API
         restTemplate.delete(url);
     }
 
     public int totalTenis() {
         String url = base + "/api/tenis/total";
+        //Hace la peticion GET, devuleve numero
         return restTemplate.getForObject(url, Integer.class);
     }
 }
