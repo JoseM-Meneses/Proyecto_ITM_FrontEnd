@@ -1,3 +1,4 @@
+
 package shoestore.FrontEnd.views;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,27 +8,44 @@ import org.springframework.web.bind.annotation.*;
 import shoestore.FrontEnd.Dtos.TenisDto;
 import shoestore.FrontEnd.webServicesClient.TenisRestTemplateClient;
 
+/*
+ Controller de vistas HTML.
+
+ Maneja:
+ - formularios
+ - thymeleaf
+ - páginas web
+*/
 @Controller
 @RequestMapping("/tenis")
 public class TenisViewController {
 
+    //Inyecta cliente Rest para usar metodos
     @Autowired
     private TenisRestTemplateClient client;
 
-    @GetMapping
-    public String mostrarFormulario(Model model){
+    @GetMapping //Hereda el "/tenis"
+    public String mostrarFormulario(Model model){ // Parametro molde para enviar la info al html
 
+        //Consume con client. y guarda en "listaTenis" para usar en html
         model.addAttribute("listaTenis", client.obtenerTenis());
+
+        //Total stock
         model.addAttribute("stockTotal", client.totalTenis());
+
+        //DTO vacío para que trabaje el formulario
         model.addAttribute("tenisDto", new TenisDto());
 
+        //Abre: templates/tenis.html
         return "tenis";
     }
 
-    @PostMapping("/guardar")
+    @PostMapping("/guardar") //Se ejecuta con <form th:action="@{/tenis/guardar}">
     public String guardarTenis(
+            //Spring llena automáticamente el DTO desde el formulario HTML con los inputs
             @ModelAttribute("tenisDto") TenisDto tenisDTO, Model model){
 
+        //Consumir API
         client.agregarTenis(
                 tenisDTO.getMarca(),
                 tenisDTO.getModelo(),
@@ -35,8 +53,10 @@ public class TenisViewController {
                 tenisDTO.getStock()
         );
 
+        //Enviar datos del tenisDto a confirmacion.html
         model.addAttribute("tenisRegistrado", tenisDTO);
 
+        //Abrir:templates/confirmacion.html
         return "confirmacion";
     }
 
@@ -48,6 +68,7 @@ public class TenisViewController {
 
         client.actualizarTenis(id, precio, stock);
 
+        //Carga la tabla ya actualizada
         return "redirect:/tenis";
     }
 

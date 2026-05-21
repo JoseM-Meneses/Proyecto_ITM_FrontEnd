@@ -17,12 +17,15 @@ public class TenisController {
     @GetMapping("/tenis-json")
     public List<TenisDto> getTenis(){
 
+        //Obtener lista desde API REST
         List<TenisDto> tenis = client.obtenerTenis();
 
+        //Mostrar consola
         for(TenisDto t : tenis){
             System.out.println(t);
         }
 
+        //Retorna JSON
         return tenis;
     }
 
