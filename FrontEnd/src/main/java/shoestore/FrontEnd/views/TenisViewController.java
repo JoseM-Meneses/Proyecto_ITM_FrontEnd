@@ -8,24 +8,15 @@ import org.springframework.web.bind.annotation.*;
 import shoestore.FrontEnd.Dtos.TenisDto;
 import shoestore.FrontEnd.webServicesClient.TenisRestTemplateClient;
 
-/*
- Controller de vistas HTML.
-
- Maneja:
- - formularios
- - thymeleaf
- - páginas web
-*/
 @Controller
 @RequestMapping("/tenis")
 public class TenisViewController {
 
-    //Inyecta cliente Rest para usar metodos
     @Autowired
     private TenisRestTemplateClient client;
 
-    @GetMapping //Hereda el "/tenis"
-    public String mostrarFormulario(Model model){ // Parametro molde para enviar la info al html
+    @GetMapping
+    public String mostrarFormulario(Model model){
 
         //Consume con client. y guarda en "listaTenis" para usar en html
         model.addAttribute("listaTenis", client.obtenerTenis());
@@ -36,7 +27,6 @@ public class TenisViewController {
         //DTO vacío para que trabaje el formulario
         model.addAttribute("tenisDto", new TenisDto());
 
-        //Abre: templates/tenis.html
         return "tenis";
     }
 
@@ -53,11 +43,9 @@ public class TenisViewController {
                 tenisDTO.getStock()
         );
 
-        //Enviar datos del tenisDto a confirmacion.html
         model.addAttribute("tenisRegistrado", tenisDTO);
 
-        //Abrir:templates/confirmacion.html
-        return "confirmacion";
+        return "confirmacionTenis";
     }
 
     @PostMapping("/actualizar")

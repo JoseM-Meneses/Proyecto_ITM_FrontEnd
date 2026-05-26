@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Compra Exitosa</title>
+    <link rel="icon"
+          href="https://cdn-icons-png.flaticon.com/512/190/190411.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+<div class="bg-white p-10 rounded-2xl shadow-xl text-center">
+
+    <h1 class="text-4xl font-bold text-green-600 mb-6">
+        Compra realizada correctamente
+    </h1>
+
+    <div th:object="${compraRegistrada}" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div class="border rounded-xl p-4">
+            <p class="text-gray-500">
+                ID Compra
+            </p>
+
+            <p class="text-xl font-semibold"
+               th:text="*{idCompra}">
+            </p>
+        </div>
+
+        <div class="border rounded-xl p-4">
+            <p class="text-gray-500">
+                ID Tenis
+            </p>
+
+            <p class="text-xl font-semibold"
+               th:text="*{idTenis}">
+            </p>
+        </div>
+
+        <div class="border rounded-xl p-4">
+            <p class="text-gray-500">
+                Talla
+            </p>
+
+            <p class="text-xl font-semibold"
+               th:text="*{talla}">
+            </p>
+        </div>
+
+        <div class="border rounded-xl p-4">
+            <p class="text-gray-500">
+                Cantidad
+            </p>
+
+            <p class="text-xl font-semibold"
+               th:text="*{cantidad}">
+            </p>
+        </div>
+
+        <div class="border rounded-xl p-4">
+            <p class="text-gray-500">
+                Precio
+            </p>
+
+            <p class="text-xl font-semibold"
+               th:text="*{precioUnitario}">
+            </p>
+        </div>
+
+        <div class="border rounded-xl p-4">
+            <p class="text-gray-500">
+                ID Cliente
+            </p>
+
+            <p class="text-xl font-semibold"
+               th:text="*{idCliente}">
+            </p>
+        </div>
+
+    </div>
+
+    <div class="mt-8">
+        <a th:href="@{/compras}"
+           class="bg-blue-600 hover:bg-blue-700
+                  text-white px-6 py-3 rounded-xl">
+            Volver a realizar compras
+        </a>
+    </div>
+
+</div>
+</body>
+</html>
