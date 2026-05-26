@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon"
+          href="https://cdn-icons-png.flaticon.com/512/190/190411.png">
+    <title>Confirmación Sucursal Creada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-8">
+
+<div class="bg-white rounded-2xl shadow-2xl p-10 w-full max-w-2xl">
+
+    <h1 class="text-4xl font-bold text-green-600 mb-8">
+        Sucursal Registrada!
+    </h1>
+
+    <div th:object="${sucursalRegistrada}" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div class="border rounded-xl p-4">
+            <p class="text-gray-500">
+                Nombre
+            </p>
+
+            <p class="text-xl font-semibold"
+               th:text="*{nombre}">
+            </p>
+        </div>
+
+        <div class="border rounded-xl p-4">
+            <p class="text-gray-500">
+                Ciudad
+            </p>
+
+            <p class="text-xl font-semibold"
+               th:text="*{ciudad}">
+            </p>
+        </div>
+
+    </div>
+
+    <div class="mt-8">
+        <a th:href="@{/sucursales}"
+           class="bg-blue-600 hover:bg-blue-700
+                  text-white px-6 py-3 rounded-xl">
+            Volver al registro de sucursales
+        </a>
+    </div>
+
+</div>
+</body>
+</html>

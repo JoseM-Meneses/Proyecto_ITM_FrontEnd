@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Compras</title>
+    <link rel="icon"
+          href="https://cdn-icons-png.flaticon.com/512/3144/3144456.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-6">
+
+<div class="max-w-7xl mx-auto">
+
+    <div class="bg-white p-6 rounded-2xl shadow-xl">
+
+        <h1 class="text-3xl font-bold mb-6">
+            Realizar Compra
+        </h1>
+
+        <form th:action="@{/compras/guardar}"
+              method="post"
+              class="grid grid-cols-2 gap-4 mb-8">
+
+            <input type="number"
+                   name="idTenis"
+                   placeholder="ID Tenis"
+                   class="border p-3 rounded-xl">
+
+            <input type="number"
+                   name="idCliente"
+                   placeholder="ID Cliente"
+                   class="border p-3 rounded-xl">
+
+            <input type="number"
+                   name="idSucursal"
+                   placeholder="ID Sucursal"
+                   class="border p-3 rounded-xl">
+
+            <input type="number"
+                   name="talla"
+                   placeholder="Talla"
+                   class="border p-3 rounded-xl">
+
+            <input type="number"
+                   name="cantidad"
+                   placeholder="Cantidad"
+                   class="border p-3 rounded-xl">
+
+            <button type="submit"
+                    class="bg-blue-600 text-white rounded-xl p-3">
+                Comprar
+            </button>
+
+        </form>
+
+        <table class="w-full bg-white">
+
+            <thead class="bg-blue-500 text-white">
+
+            <tr>
+                <th class="p-3">ID Compra</th>
+                <th class="p-3">ID Cliente</th>
+                <th class="p-3">ID Sucursal</th>
+                <th class="p-3">ID Tenis</th>
+                <th class="p-3">Talla</th>
+                <th class="p-3">Cantidad</th>
+                <th class="p-3">Precio</th>
+                <th class="p-3">Eliminar</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="c : ${listaCompras}"
+                class="border-b text-center">
+
+                <td class="p-3"
+                    th:text="${c.idCompra}">
+                </td>
+
+                <td class="p-3"
+                    th:text="${c.idCliente}">
+                </td>
+
+                <td class="p-3"
+                    th:text="${c.idSucursal}">
+                </td>
+
+                <td class="p-3"
+                    th:text="${c.idTenis}">
+                </td>
+
+                <td class="p-3"
+                    th:text="${c.talla}">
+                </td>
+
+                <td class="p-3"
+                    th:text="${c.cantidad}">
+                </td>
+
+                <td class="p-3"
+                    th:text="${c.precioUnitario}">
+                </td>
+
+                <td class="p-3">
+
+                    <form th:action="@{/compras/eliminar}"
+                          method="post">
+
+                        <input type="hidden"
+                               name="idCompra"
+                               th:value="${c.idCompra}">
+
+                        <button type="submit"
+                                class="bg-red-500 text-white
+                                       px-4 py-2 rounded-xl">
+
+                            Eliminar
+                        </button>
+
+                    </form>
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="mt-8 flex gap-4">
+
+            <a th:href="@{/clientes}"
+               class="bg-blue-600 hover:bg-blue-700
+              text-white px-6 py-3 rounded-xl">
+                Ir a la interfaz de clientes
+            </a>
+
+            <a th:href="@{/sucursales}"
+               class="bg-blue-600 hover:bg-blue-700
+              text-white px-6 py-3 rounded-xl">
+                Ir a la interfaz de sucursales
+            </a>
+
+            <a th:href="@{/tenis}"
+               class="bg-blue-600 hover:bg-blue-700
+              text-white px-6 py-3 rounded-xl">
+                Ir a la interfaz de tenis
+            </a>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

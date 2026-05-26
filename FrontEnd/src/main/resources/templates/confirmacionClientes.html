@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Confirmación</title>
+    <link rel="icon"
+          href="https://cdn-icons-png.flaticon.com/512/190/190411.png">
+    <title>Confirmación Cliente Creado</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -14,60 +15,49 @@
 <div class="bg-white rounded-2xl shadow-2xl p-10 w-full max-w-2xl">
 
     <h1 class="text-4xl font-bold text-green-600 mb-8">
-        Tenis Registrado!
+        Cliente Registrado!
     </h1>
 
-    <div th:object="${tenisRegistrado}" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!---Object: conecta el formulario con tenisRegistrado del View para que este trabaje en el (gets)--->
+    <div th:object="${clienteRegistrado}" class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
         <div class="border rounded-xl p-4">
             <p class="text-gray-500">
-                Marca
+                Nombre
             </p>
 
             <p class="text-xl font-semibold"
-               th:text="*{marca}">
-            </p> <!--Text: Reemplaza el valor vacio por el valor de marca obtenida (getMarca)--->
-        </div>
-
-        <div class="border rounded-xl p-4">
-            <p class="text-gray-500">
-                Modelo
-            </p>
-
-            <p class="text-xl font-semibold"
-               th:text="*{modelo}">
-            </p> <!---getModelo-->
-        </div>
-
-        <div class="border rounded-xl p-4">
-            <p class="text-gray-500">
-                Precio
-            </p>
-
-            <p class="text-xl font-semibold"
-               th:text="*{precio}">
+               th:text="*{nombre}">
             </p>
         </div>
 
         <div class="border rounded-xl p-4">
             <p class="text-gray-500">
-                Stock
+                Correo
             </p>
 
             <p class="text-xl font-semibold"
-               th:text="*{stock}">
+               th:text="*{correo}">
+            </p>
+        </div>
+
+        <div class="border rounded-xl p-4">
+            <p class="text-gray-500">
+                Telefono
+            </p>
+
+            <p class="text-xl font-semibold"
+               th:text="*{telefono}">
             </p>
         </div>
 
     </div>
 
     <div class="mt-8">
-        <a th:href="@{/tenis}"
+        <a th:href="@{/clientes}"
            class="bg-blue-600 hover:bg-blue-700
                   text-white px-6 py-3 rounded-xl">
-            Volver al Inventario
-        </a> <!--Link para devolverse a la URL principal (/tenis)--->
+            Volver al registro de clientes
+        </a>
     </div>
 
 </div>

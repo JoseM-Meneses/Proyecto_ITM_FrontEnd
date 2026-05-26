@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sucursales</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/684/684908.png">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+
+<body class="p-4 md:p-6">
+
+<div class="max-w-6xl mx-auto">
+
+    <div class="mb-6">
+
+        <h1 class="text-4xl font-bold text-gray-800">
+            Interfaz de sucursales
+        </h1>
+        <p class="text-gray-600 mt-1 text-base">
+            Gestión de sucursales
+        </p>
+
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-xl p-6">
+
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-5">
+                Registrar Sucursal
+            </h2>
+
+            <form th:action="@{/sucursales/guardar}"
+                  th:object="${sucursalDto}"
+                  method="post"
+                  class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <div>
+                    <label class="block text-base font-medium mb-2">
+                        Nombre
+                    </label>
+
+                    <input type="text"
+                           th:field="*{nombre}"
+                           required
+                           class="w-full border border-gray-300
+                                  rounded-xl p-3 text-base
+                                  focus:outline-none
+                                  focus:ring-2
+                                  focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-base font-medium mb-2">
+                        Ciudad
+                    </label>
+
+                    <input type="text"
+                           th:field="*{ciudad}"
+                           required
+                           class="w-full border border-gray-300
+                                  rounded-xl p-3 text-base
+                                  focus:outline-none
+                                  focus:ring-2
+                                  focus:ring-blue-500">
+                </div>
+
+                <div class="md:col-span-2 mt-1">
+
+                    <button type="submit"
+                            class="bg-blue-600 hover:bg-blue-700
+                                   text-white text-base font-semibold
+                                   px-6 py-3 rounded-xl
+                                   transition duration-200">
+                        Guardar Sucursal
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="overflow-x-auto rounded-xl shadow">
+
+            <table class="w-full bg-white">
+
+                <thead class="bg-blue-500 text-white">
+
+                <tr>
+
+                    <th class="p-3 text-sm">
+                        ID
+                    </th>
+
+                    <th class="p-3 text-sm">
+                        Nombre
+                    </th>
+
+                    <th class="p-3 text-sm">
+                        Ciudad
+                    </th>
+
+                    <th class="p-3 text-sm text-center">
+                        Actualizar
+                    </th>
+
+                    <th class="p-3 text-sm">
+                        Eliminar
+                    </th>
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="s : ${listarSucursales}" class="border-b hover:bg-gray-50">
+
+                    <td class="p-3 text-center text-sm"
+                        th:text="${s.idSucursal}">
+                    </td>
+
+                    <td class="p-3 text-center text-sm"
+                        th:text="${s.nombre}">
+                    </td>
+
+                    <td class="p-3 text-center text-sm"
+                        th:text="${s.ciudad}">
+                    </td>
+
+
+                    <td class="p-3 text-center">
+                        <form th:action="@{/sucursales/actualizar}" method="post" class="flex gap-2 items-center justify-center">
+
+                            <input type="hidden" name="id" th:value="${s.idSucursal}">
+
+                            <input type="text"
+                                   name="nombre"
+                                   th:value="${s.nombre}"
+                                   class="w-20,5 p-2 text-sm border rounded-lg">
+
+                            <input type="text"
+                                   name="ciudad"
+                                   th:value="${s.ciudad}"
+                                   class="w-20,5 p-2 text-sm border rounded-lg">
+
+                            <button type="submit"
+                                    class="bg-blue-500 hover:bg-blue-600
+                                           text-white text-sm
+                                           px-3 py-2 rounded-lg">
+                                Actualizar
+                            </button>
+                        </form>
+                    </td>
+
+                    <td class="p-3 text-center">
+                        <form th:action="@{/sucursales/eliminar}"
+                              method="post">
+
+                            <input type="hidden"
+                                   name="id"
+                                   th:value="${s.idSucursal}">
+
+                            <button type="submit"
+                                    class="bg-red-500 hover:bg-red-600
+                                           text-white text-sm
+                                           px-3 py-2 rounded-lg">
+                                Eliminar
+                            </button>
+                        </form>
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="mt-8">
+            <a th:href="@{/tenis}"
+               class="bg-blue-600 hover:bg-blue-700
+                  text-white px-6 py-3 rounded-xl">
+                Ir a la interfaz de tenis
+            </a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
