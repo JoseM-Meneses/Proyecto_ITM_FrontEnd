@@ -24,14 +24,9 @@ public class CompraViewController {
     }
 
     @PostMapping("/guardar")
-    public String guardarCompra(
-            @ModelAttribute("compraDto")
-            CompraDetalleDto compraDto,
-
-            Model model){
+    public String guardarCompra(@ModelAttribute("compraDto") CompraDetalleDto compraDto, Model model){
 
         try {
-
             CompraDetalleDto compraRegistrada =
                     client.comprarTenis(
                             compraDto.getIdTenis(),
@@ -43,10 +38,7 @@ public class CompraViewController {
 
             if (compraRegistrada == null) {
 
-                model.addAttribute(
-                        "mensajeError",
-                        "No se pudo realizar la compra"
-                );
+                model.addAttribute("mensajeError", "No se pudo realizar la compra");
 
                 return "errorCompra";
             }
@@ -56,7 +48,7 @@ public class CompraViewController {
                     compraRegistrada
             );
 
-            return "confirmacionCompra";
+            return "confirmacionCompras";
 
         } catch (Exception e) {
 
