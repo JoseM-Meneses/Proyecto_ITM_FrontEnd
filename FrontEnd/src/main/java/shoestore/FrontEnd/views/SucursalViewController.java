@@ -25,16 +25,23 @@ public class SucursalViewController {
 
     @PostMapping("/guardar")
     public String guardarSucursal(
-            @ModelAttribute("sucursalDto") SucursalDto sucursalDto, Model model){
+            @ModelAttribute("sucursalDto")
+            SucursalDto sucursalDto,
+            Model model){
 
-        client.guardarSucursal(
-                sucursalDto.getNombre(),
-                sucursalDto.getCiudad()
-        );
+        try {
 
-        model.addAttribute("sucursalRegistrada", sucursalDto);
+            client.guardarSucursal(sucursalDto.getNombre(), sucursalDto.getCiudad());
+            model.addAttribute("sucursalRegistrada", sucursalDto);
 
-        return "confirmacionSucursales";
+            return "confirmacionSucursales";
+
+        } catch (Exception e) {
+
+            model.addAttribute("mensajeError", "No se pudo registrar la sucursal");
+
+            return "errorSucursal";
+        }
     }
 
     @PostMapping("/actualizar")

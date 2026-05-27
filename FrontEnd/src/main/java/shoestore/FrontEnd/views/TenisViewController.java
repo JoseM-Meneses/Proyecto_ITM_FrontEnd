@@ -30,22 +30,32 @@ public class TenisViewController {
         return "tenis";
     }
 
-    @PostMapping("/guardar") //Se ejecuta con <form th:action="@{/tenis/guardar}">
+    @PostMapping("/guardar")
     public String guardarTenis(
-            //Spring llena automáticamente el DTO desde el formulario HTML con los inputs
-            @ModelAttribute("tenisDto") TenisDto tenisDTO, Model model){
+            @ModelAttribute("tenisDto")
+            TenisDto tenisDto,
+            Model model){
 
-        //Consumir API
-        client.agregarTenis(
-                tenisDTO.getMarca(),
-                tenisDTO.getModelo(),
-                tenisDTO.getPrecio(),
-                tenisDTO.getStock()
-        );
+        try {
 
-        model.addAttribute("tenisRegistrado", tenisDTO);
+            client.agregarTenis(
+                    tenisDto.getMarca(),
+                    tenisDto.getModelo(),
+                    tenisDto.getPrecio(),
+                    tenisDto.getStock()
+            );
 
-        return "confirmacionTenis";
+            model.addAttribute("tenisRegistrado", tenisDto
+            );
+
+            return "confirmacionTenis";
+
+        } catch (Exception e) {
+
+            model.addAttribute("mensajeError", "No se pudo registrar el tenis");
+
+            return "errorTenis";
+        }
     }
 
     @PostMapping("/actualizar")

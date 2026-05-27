@@ -25,17 +25,29 @@ public class ClienteViewController {
 
     @PostMapping("/guardar")
     public String guardarCliente(
-            @ModelAttribute("clienteDto") ClienteDto clienteDto, Model model){
+            @ModelAttribute("clienteDto")
+            ClienteDto clienteDto,
 
-        client.guardarCliente(
-                clienteDto.getNombre(),
-                clienteDto.getCorreo(),
-                clienteDto.getTelefono()
-        );
+            Model model){
 
-        model.addAttribute("clienteRegistrado", clienteDto);
+        try {
 
-        return "confirmacionClientes";
+            client.guardarCliente(
+                    clienteDto.getNombre(),
+                    clienteDto.getCorreo(),
+                    clienteDto.getTelefono()
+            );
+
+            model.addAttribute("clienteRegistrado", clienteDto);
+
+            return "confirmacionClientes";
+
+        } catch (Exception e) {
+
+            model.addAttribute("mensajeError", "No se pudo registrar el cliente");
+
+            return "errorCliente";
+        }
     }
 
     @PostMapping("/actualizar")
